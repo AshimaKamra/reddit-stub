@@ -21,6 +21,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus CONFLICT.
      */
+    //signup restricted exception
     @ExceptionHandler(SignUpRestrictedException.class)
     public ResponseEntity<ErrorResponse> signUpRestrictedException(SignUpRestrictedException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -33,6 +34,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus UNAUTHORIZED.
      */
+    //authentication failed exception
     @ExceptionHandler(AuthenticationFailedException.class)
     public ResponseEntity<ErrorResponse> authenticationFailedException(AuthenticationFailedException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -46,6 +48,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus UNAUTHORIZED.
      */
+    //signout restricted exception
     @ExceptionHandler(SignOutRestrictedException.class)
     public ResponseEntity<ErrorResponse> signOutRestrictedException(SignOutRestrictedException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -58,6 +61,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus FORBIDDEN.
      */
+    //authorization failed exception
     @ExceptionHandler(AuthorizationFailedException.class)
     public ResponseEntity<ErrorResponse> authorizationFailedException(AuthorizationFailedException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -70,6 +74,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus NOT_FOUND.
      */
+    //user not found exception
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> userNotFoundException(UserNotFoundException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -82,6 +87,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus NOT_FOUND.
      */
+    //invalid post exception
     @ExceptionHandler(InvalidPostException.class)
     public ResponseEntity<ErrorResponse> invalidPostException(InvalidPostException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
@@ -94,6 +100,7 @@ public class RestExceptionHandler {
      * @param request - The web request object gives access to all the request parameters.
      * @return - ResponseEntity<ErrorResponse> type object displaying error code and error message along with HttpStatus NOT_FOUND.
      */
+    //comment not found exception
     @ExceptionHandler(CommentNotFoundException.class)
     public ResponseEntity<ErrorResponse> commentNotFoundException(CommentNotFoundException exc, WebRequest request) {
         return new ResponseEntity<ErrorResponse>(
