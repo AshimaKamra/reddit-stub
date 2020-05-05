@@ -1,0 +1,74 @@
+-------------------------------------------------------------------------------
+Test set: controller.PostControllerTest
+-------------------------------------------------------------------------------
+Tests run: 16, Failures: 16, Errors: 0, Skipped: 0, Time elapsed: 3.248 s <<< FAILURE! - in controller.PostControllerTest
+getAllPostsWithSignedOutUser(controller.PostControllerTest)  Time elapsed: 0.104 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.getAllPostsWithSignedOutUser(PostControllerTest.java:66)
+
+getAllPostsByUserWithSignedOutUser(controller.PostControllerTest)  Time elapsed: 0.148 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.getAllPostsByUserWithSignedOutUser(PostControllerTest.java:147)
+
+deletePostWithSignedOutUser(controller.PostControllerTest)  Time elapsed: 0.172 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.deletePostWithSignedOutUser(PostControllerTest.java:114)
+
+getAllPostsForNonExistingUser(controller.PostControllerTest)  Time elapsed: 0.147 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.PostControllerTest.getAllPostsForNonExistingUser(PostControllerTest.java:156)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.PostControllerTest.getAllPostsForNonExistingUser(PostControllerTest.java:156)
+
+editPostWithWithSignedOutUser(controller.PostControllerTest)  Time elapsed: 0.208 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.editPostWithWithSignedOutUser(PostControllerTest.java:82)
+
+deletePostWithNonExistingAccessToken(controller.PostControllerTest)  Time elapsed: 0.136 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.deletePostWithNonExistingAccessToken(PostControllerTest.java:106)
+
+getAllPosts(controller.PostControllerTest)  Time elapsed: 0.228 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at controller.PostControllerTest.getAllPosts(PostControllerTest.java:51)
+
+getAllPostsWithNonExistingAccessToken(controller.PostControllerTest)  Time elapsed: 0.239 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.getAllPostsWithNonExistingAccessToken(PostControllerTest.java:58)
+
+editPostWithoutOwnership(controller.PostControllerTest)  Time elapsed: 0.356 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.editPostWithoutOwnership(PostControllerTest.java:90)
+
+createPostWithNonExistingAccessToken(controller.PostControllerTest)  Time elapsed: 0.531 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.createPostWithNonExistingAccessToken(PostControllerTest.java:35)
+
+deletePostWithoutOwnership(controller.PostControllerTest)  Time elapsed: 0.132 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.deletePostWithoutOwnership(PostControllerTest.java:122)
+
+editPostWithNonExistingAccessToken(controller.PostControllerTest)  Time elapsed: 0.152 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.editPostWithNonExistingAccessToken(PostControllerTest.java:74)
+
+createPostWithSignedOutUser(controller.PostControllerTest)  Time elapsed: 0.204 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.createPostWithSignedOutUser(PostControllerTest.java:43)
+
+editNonExistingPost(controller.PostControllerTest)  Time elapsed: 0.119 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.PostControllerTest.editNonExistingPost(PostControllerTest.java:99)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.PostControllerTest.editNonExistingPost(PostControllerTest.java:99)
+
+deleteNoneExistingPost(controller.PostControllerTest)  Time elapsed: 0.2 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.PostControllerTest.deleteNoneExistingPost(PostControllerTest.java:132)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.PostControllerTest.deleteNoneExistingPost(PostControllerTest.java:132)
+
+getAllPostsByUserWithNonExistingAccessToken(controller.PostControllerTest)  Time elapsed: 0.152 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.PostControllerTest.getAllPostsByUserWithNonExistingAccessToken(PostControllerTest.java:139)
+

@@ -1,0 +1,68 @@
+-------------------------------------------------------------------------------
+Test set: controller.CommentControllerTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 14, Errors: 0, Skipped: 0, Time elapsed: 2.175 s <<< FAILURE! - in controller.CommentControllerTest
+deleteCommentWithoutOwnership(controller.CommentControllerTest)  Time elapsed: 0.06 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.deleteCommentWithoutOwnership(CommentControllerTest.java:115)
+
+editCommentWithSignedOutUser(controller.CommentControllerTest)  Time elapsed: 0.048 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.editCommentWithSignedOutUser(CommentControllerTest.java:67)
+
+createCommentWithNonExistingAccessToken(controller.CommentControllerTest)  Time elapsed: 0.052 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.createCommentWithNonExistingAccessToken(CommentControllerTest.java:35)
+
+getAllCommentsToPostWithNonExistingAccessToken(controller.CommentControllerTest)  Time elapsed: 0.575 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.getAllCommentsToPostWithNonExistingAccessToken(CommentControllerTest.java:123)
+
+editCommentWithoutOwnership(controller.CommentControllerTest)  Time elapsed: 0.097 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.editCommentWithoutOwnership(CommentControllerTest.java:83)
+
+createCommentWithSignedOutUser(controller.CommentControllerTest)  Time elapsed: 0.08 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.createCommentWithSignedOutUser(CommentControllerTest.java:43)
+
+deleteCommentWithNonExistingAccessToken(controller.CommentControllerTest)  Time elapsed: 0.167 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.deleteCommentWithNonExistingAccessToken(CommentControllerTest.java:91)
+
+editNonExistingComment(controller.CommentControllerTest)  Time elapsed: 0.069 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.CommentControllerTest.editNonExistingComment(CommentControllerTest.java:76)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.CommentControllerTest.editNonExistingComment(CommentControllerTest.java:76)
+
+editCommentWithNonExistingAccessToken(controller.CommentControllerTest)  Time elapsed: 0.084 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.editCommentWithNonExistingAccessToken(CommentControllerTest.java:59)
+
+createCommentForNonExistingPost(controller.CommentControllerTest)  Time elapsed: 0.104 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.CommentControllerTest.createCommentForNonExistingPost(CommentControllerTest.java:52)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.CommentControllerTest.createCommentForNonExistingPost(CommentControllerTest.java:52)
+
+getAllCommentsToPostWithSignedOutUser(controller.CommentControllerTest)  Time elapsed: 0.295 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.getAllCommentsToPostWithSignedOutUser(CommentControllerTest.java:131)
+
+deleteCommentWithSignedOutUser(controller.CommentControllerTest)  Time elapsed: 0.32 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<403> but was:<404>
+	at controller.CommentControllerTest.deleteCommentWithSignedOutUser(CommentControllerTest.java:99)
+
+deleteNonExistingComment(controller.CommentControllerTest)  Time elapsed: 0.084 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.CommentControllerTest.deleteNonExistingComment(CommentControllerTest.java:108)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.CommentControllerTest.deleteNonExistingComment(CommentControllerTest.java:108)
+
+getAllCommentsToNonExistingPost(controller.CommentControllerTest)  Time elapsed: 0.124 s  <<< FAILURE!
+java.lang.AssertionError: No value at JSON path "code"
+	at controller.CommentControllerTest.getAllCommentsToNonExistingPost(CommentControllerTest.java:140)
+Caused by: java.lang.IllegalArgumentException: json can not be null or empty
+	at controller.CommentControllerTest.getAllCommentsToNonExistingPost(CommentControllerTest.java:140)
+
