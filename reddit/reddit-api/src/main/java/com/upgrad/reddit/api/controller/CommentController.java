@@ -68,55 +68,49 @@ public class CommentController {
      */
 
     //comment on the particular post
-    @RequestMapping(method = RequestMethod.POST, path = "/post/{postId}/comment/create", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<CommentResponse> createComment (@PathVariable("postId") final String postId, @RequestHeader("authorization") final String authorization, final CommentRequest commentRequest) throws AuthorizationFailedException {
-
-        final ZonedDateTime now = ZonedDateTime.now();
+    @PostMapping("/createComment")
+    public ResponseEntity<CommentResponse> createComment(@RequestBody CommentRequest commentRequest, @RequestBody String postId, @RequestHeader String authorization)
+            throws  AuthorizationFailedException,InvalidPostException {
         CommentEntity commentEntity = new CommentEntity();
-        commentEntity.setUuid(UUID.randomUUID().toString());
+        commentEntity.setPost(commentBusinessService.getPostByUuid(postId));
         commentEntity.setComment(commentRequest.getComment());
-        commentEntity.setDate(now);
+        CommentEntity newComment = commentBusinessService.createComment(commentEntity,postId,authorization);
+        return new ResponseEntity<CommentResponse>(new CommentResponse().id(newComment.getUuid()),HttpStatus.OK);
 
-        final CommentEntity createdComment = commentBusinessService.createComment(commentEntity , postId, authorization);
-        CommentResponse commentResponse = new CommentResponse().id(createdComment.getUuid()).status("COMMENT CREATED");
-
-        return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.CREATED);
     }
 
     //edit a comment in database
-    @RequestMapping(method = RequestMethod.PUT, path = "/comment/edit/{commentId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<CommentResponse> editCommentContent  (@PathVariable("commentId") final String commentId, @RequestHeader("authorization") final String authorization, final CommentEditRequest commentEditRequest) throws AuthorizationFailedException, CommentNotFoundException {
-
-        final ZonedDateTime now = ZonedDateTime.now();
+    @PostMapping("/editCommentContent")
+    public ResponseEntity<CommentEditResponse> editCommentContent(@RequestBody CommentEditRequest commentEditRequest, @RequestBody String commentId, @RequestHeader String authorization)
+            throws AuthorizationFailedException,CommentNotFoundException {
         CommentEntity commentEntity = new CommentEntity();
         commentEntity.setComment(commentEditRequest.getContent());
-        commentEntity.setDate(now);
+        commentEntity.setUuid(commentId);
+        CommentEntity editedCommentEntity = commentBusinessService.editCommentContent(commentEntity,commentId,authorization);
+        return new ResponseEntity<CommentEditResponse>(new CommentEditResponse().id(commentEntity.getUuid()),HttpStatus.OK);
 
-        final CommentEntity editedComment = commentBusinessService.editCommentContent(commentEntity , commentId, authorization);
-        CommentResponse commentResponse = new CommentResponse().id(editedComment.getUuid()).status("COMMENT EDITED");
-
-        return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.OK);
     }
 
     //delete a comment in database
-    @RequestMapping(method = RequestMethod.DELETE, path = "/comment/delete/{commentId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<CommentResponse> deleteComment  (@PathVariable("commentId") final String commentId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, CommentNotFoundException {
-        final CommentEntity deletedComment = commentBusinessService.deleteComment(commentId, authorization);
-        CommentResponse commentResponse = new CommentResponse().id(deletedComment.getUuid()).status("COMMENT DELETED!");
-
-        return new ResponseEntity<CommentResponse>(commentResponse, HttpStatus.OK);
+    @PostMapping("/deleteComment")
+    public  ResponseEntity<CommentDeleteResponse> deleteComment(@RequestBody  String commentId,@RequestHeader  String authorization)
+            throws AuthorizationFailedException,CommentNotFoundException
+    {
+        CommentEntity commentEntity = commentBusinessService.deleteComment(commentId,authorization);
+        return new ResponseEntity<CommentDeleteResponse>(new CommentDeleteResponse().id(commentId),HttpStatus.OK);
     }
 
     //fetch all the comments of a particular user from database
-    @RequestMapping(method = RequestMethod.GET, path = "comment/all/{postId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<CommentDetailsResponse>> getAllCommentsToPost  (@PathVariable("postId") final String postId, @RequestHeader("authorization") final String authorization) throws AuthorizationFailedException, InvalidPostException {
+    @GetMapping("/getAllCommentsToPost")
+    public ResponseEntity<List<CommentDetailsResponse>> getAllCommentsToPost(@RequestBody String postId, @RequestHeader String authorization)
+            throws AuthorizationFailedException, InvalidPostException {
+        List<CommentEntity> commentEntityList = commentBusinessService.getCommentsByPost(postId,authorization).getResultList();
+        List<CommentDetailsResponse> responses = new ArrayList<>();
 
-        final List<CommentEntity> allComments = commentBusinessService.getAllCommentsToPost(postId, authorization);
-        final List<CommentDetailsResponse> allCommentDetailsResponse = new ArrayList<CommentDetailsResponse>();
-        for(CommentEntity commentEntity : allComments) {
-            CommentDetailsResponse commentDetailsResponse = new CommentDetailsResponse().id(commentEntity.getUuid()).postContent(commentEntity.getPost().getContent()).commentContent(commentEntity.getComment());
-            allCommentDetailsResponse.add(commentDetailsResponse);
+        for (CommentEntity entity: commentEntityList) {
+            responses.add(new CommentDetailsResponse().id(entity.getUuid()).commentContent(entity.getComment()));
         }
-        return new ResponseEntity<List<CommentDetailsResponse>>(allCommentDetailsResponse, HttpStatus.OK);
+
+        return new ResponseEntity<List<CommentDetailsResponse>>(responses,HttpStatus.OK);
     }
 }
